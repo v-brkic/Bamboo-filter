@@ -33,13 +33,13 @@ struct Config
 {
     std::string genomeFile = "";
     std::string outputFile = "results.txt";
-    std::size_t capacity = 16;
+    std::size_t capacity = 4096;
     std::size_t bucketSize = 4;
     float loadFactor = 0.8f;
-    std::size_t maxIter = 500;
+    std::size_t maxIter = 2000;
     int k = 10;
     std::size_t numKmers = 1000;
-    std::size_t segmentSize = 4;
+    std::size_t segmentSize = 32;
 };
 
 /*-------------------------------------------------------
