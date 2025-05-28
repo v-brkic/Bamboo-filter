@@ -27,6 +27,15 @@
 #include <vector>
 #include <random>
 
+static std::mt19937 rng(std::random_device{}());
+
+inline std::uint32_t rnd32() { return rng(); }
+
+/*----------------------------------------------------
+  Zamjena za uniformno <0,n)
+----------------------------------------------------*/
+inline std::size_t rndIndex(std::size_t n) { return rnd32() % n; }
+
 /*-------------------------------------------------------
   Simple struct for CLI parameters
  -------------------------------------------------------*/
@@ -111,39 +120,30 @@ std::string readGenome(const std::string &path)
     return g;
 }
 
-/*-------------------------------------------------------
-  Random k-mer sampler from genome
- -------------------------------------------------------*/
-std::vector<std::string> sampleKmers(const std::string &genome,
-                                     int k, std::size_t n)
+std::vector<std::string> sampleKmers(const std::string &g, int k, std::size_t n)
 {
     std::vector<std::string> v;
-    if (genome.size() < static_cast<std::size_t>(k))
+    if (g.size() < (std::size_t)k)
         return v;
-    std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<std::size_t> dist(0, genome.size() - k);
     v.reserve(n);
     for (std::size_t i = 0; i < n; ++i)
-        v.emplace_back(genome.substr(dist(rng), k));
+    {
+        std::size_t pos = rndIndex(g.size() - k + 1);
+        v.emplace_back(g.substr(pos, k));
+    }
     return v;
 }
 
-/*-------------------------------------------------------
-  Pure random strings (negative probes)
- -------------------------------------------------------*/
 std::vector<std::string> randomStrings(int k, std::size_t n)
 {
-    static const char ALPH[5] = {'A', 'C', 'G', 'T', 'N'};
-    std::mt19937 rng(std::random_device{}());
-    std::uniform_int_distribution<int> dist(0, 4);
+    static const char A[5] = {'A', 'C', 'G', 'T', 'N'};
     std::vector<std::string> v;
     v.reserve(n);
     for (std::size_t i = 0; i < n; ++i)
     {
-        std::string s;
-        s.reserve(k);
+        std::string s(k, 'A');
         for (int j = 0; j < k; ++j)
-            s.push_back(ALPH[dist(rng)]);
+            s[j] = A[rndIndex(5)];
         v.push_back(std::move(s));
     }
     return v;
