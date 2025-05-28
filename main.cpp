@@ -25,6 +25,7 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
+#include <random>
 
 /*-------------------------------------------------------
   Simple struct for CLI parameters
@@ -248,12 +249,13 @@ private:
     {
         if (depth >= maxEvict_)
             return false;
-        auto &b = arr[idx];
-        if (b.empty())
+        auto &bucket = arr[idx];
+        if (bucket.empty())
             return false;
-        static thread_local std::mt19937 rng(std::random_device{}());
-        std::uniform_int_distribution<std::size_t> d(0, b.size() - 1);
-        std::swap(fp, b[d(rng)]); // evict one
+
+        std::size_t victim = rndIndex(bucket.size()); // nasumična pozicija
+        std::swap(fp, bucket[victim]);
+
         std::size_t alt = altIndex(idx, fp, arr.size());
         if (tryPut(arr, alt, fp))
             return true;
