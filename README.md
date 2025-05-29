@@ -5,14 +5,49 @@ www.fer.unizg.hr/predmet/bio1
 
 # Bamboo Filter
 
-```bash
-# inside the project directory
-make          # produces an executable named `bamboo_filter`
-./bamboo_filter --genome=genomes/ecoli.fa \
-  --kmer=20 --numKmers=10000 \          #starts the implementation with default values
+This project contains a C++ implementation of a Bamboo-style Cuckoo Filter.
 
-./bamboo_filter --genome=genomes/ecoli.fa \
-  --kmer=20 --numKmers=10000 \
-  --capacity=4096 --bucketSize=4 \
-  --loadFactor=0.8 --maxIter=2000           #starts the implementation with expected values
-```
+## Prerequisites
+
+* A C++ compiler that supports C++17 (e.g., g++, clang++)
+* CMake (version 3.10 or newer)
+* Make (or your chosen build system generator)
+
+## Building the Project
+
+To build the project, follow these steps from the root directory of the project:
+
+1.  Create a build directory:
+    ```bash
+    mkdir build
+    ```
+
+2.  Navigate into the build directory:
+    ```bash
+    cd build
+    ```
+
+3.  Run CMake to configure the project:
+    ```bash
+    cmake ..
+    ```
+    If you want a release build (optimized), you can specify it:
+    ```bash
+    cmake .. -DCMAKE_BUILD_TYPE=Release
+    ```
+    For a debug build:
+    ```bash
+    cmake .. -DCMAKE_BUILD_TYPE=Debug
+    ```
+
+4.  Compile the project:
+    ```bash
+    make
+    ```
+
+## Running
+
+After a successful build, the executable will be located in the `build` directory. You can run it from the `build` directory:
+
+```bash
+./BambooFilterTest
