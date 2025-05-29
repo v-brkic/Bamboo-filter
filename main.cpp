@@ -4,8 +4,6 @@
 #include "src/bamboo_filter.h"
 
 int main() {
-    // Primjer korištenja vašeg filtera
-    // Promijenite parametre prema potrebi
     std::size_t initial_buckets = 1024;
     std::size_t slots_per_bucket = 4;
     float load_factor = 0.95f;
