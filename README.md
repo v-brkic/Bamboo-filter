@@ -12,7 +12,7 @@ This project contains a C++ implementation of a Cuckoo-style filter with dynamic
 This implementation draws inspiration from and aims to address challenges discussed in the following academic paper:
 
 * Wang, H., Geng, Z., Li, Q., Zhang, Y., Liu, X. S., Jin, R., Jiang, H., Wu, X., & Cong, J. (2022). **Bamboo Filters: Make Resizing Smooth and Adaptive**. In *2022 IEEE 38th International Conference on Data Engineering (ICDE)*  IEEE.
-    * DOI: [10.1109/ICDE53745.2022.00241](https://doi.org/10.1109/TNET.2024.3403997)
+    * DOI: [10.1109/TNET.2024.3403997](https://doi.org/10.1109/TNET.2024.3403997)
     * IEEE Xplore: [Link to paper](https://ieeexplore.ieee.org/abstract/document/9835626)
 
 The reference C++ implementation by the original authors, which was used for comparison in this project, can be found on GitHub:
